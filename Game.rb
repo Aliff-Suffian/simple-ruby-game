@@ -48,12 +48,10 @@ on :mouse_down do |event|
             game_started = true
             out_of_attempt = true
             puts "Well done ! You have completed 5 attempts." 
-            puts "Enter values to calculate their sum. Enter 'done' when finished."
-            loop do
-                print "Enter your duration (or 'done'): "
+            puts "Enter duration to calculate their sum. "
+            5.times do |i|
+                print "Enter your duration for attempt #{i + 1}: "
                 input = gets.chomp
-              
-                break if input.downcase == 'done'
               
                 value = input.to_f
                 sum += value

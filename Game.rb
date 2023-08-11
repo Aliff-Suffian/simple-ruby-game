@@ -4,9 +4,9 @@ def get_input
     gets.chomp
 end
 set background: 'red'
-set title: "Responsive Game"
+set title: "Reaction Game"
 
-puts "Welcome to responsive game! Please insert your name."
+puts "Welcome to Reaction game! Please insert your name."
 player_name = get_input
 puts "Welcome #{player_name}! This game will test your speed reactions, you will have 5 attempts. Try to finish as fast as you can."
 
@@ -24,19 +24,20 @@ duration = nil
 attempt_count = 1
 attempt_limit = 6
 out_of_attempt = false
+sum = 0 
 
 on :mouse_down do |event|
 
         
         if game_started
-        if  square.contains?(event.x, event.y)
+        if square.contains?(event.x, event.y)
         duration = (Time.now - start_time).round(2)
-        message = Text.new( "You took #{duration} second to click ! You have #{attempt_limit - (attempt_count + 1)} attempts left.")
+        message = Text.new( "You have #{attempt_limit - (attempt_count + 1)} attempts left.")
         square.remove
         game_started = false
 
         if attempt_count < attempt_limit
-            puts "Keep Going #{player_name}! You have #{attempt_limit - (attempt_count + 1)} attempts left."
+            puts "Keep Going #{player_name}! You took #{duration} second to click !"
             attempt_count += 1
         
         end
@@ -47,7 +48,17 @@ on :mouse_down do |event|
             game_started = true
             out_of_attempt = true
             puts "Well done ! You have completed 5 attempts." 
-            
+            puts "Enter values to calculate their sum. Enter 'done' when finished."
+            loop do
+                print "Enter your duration (or 'done'): "
+                input = gets.chomp
+              
+                break if input.downcase == 'done'
+              
+                value = input.to_f
+                sum += value
+              end
+              puts "The sum of the entered values is: #{sum}"
            
         end 
         if out_of_attempt == true

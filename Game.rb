@@ -25,6 +25,8 @@ attempt_count = 1
 attempt_limit = 6
 out_of_attempt = false
 sum = 0 
+average = 0
+
 
 on :mouse_down do |event|
 
@@ -54,9 +56,11 @@ on :mouse_down do |event|
                 input = gets.chomp
               
                 value = input.to_f
-                sum += value
+                sum += (value).round(2)
               end
-              puts "The sum of the entered values is: #{sum}"
+              puts "Your accumulated reaction time is: #{sum}"
+              average = (sum / 5).round(2)
+              puts "Your average reaction time is #{average} "
            
         end 
         if out_of_attempt == true
